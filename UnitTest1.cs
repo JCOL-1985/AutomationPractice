@@ -7,6 +7,11 @@ namespace AutomationPractice
         {
         }
 
+        [TearDown]
+        public void TearDown()
+        {
+        }
+
         [Test]
         public void Test1()
         {
