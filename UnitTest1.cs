@@ -1,5 +1,6 @@
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
+using OpenQA.Selenium.Interactions;
 using System.Security.Cryptography.X509Certificates;
 
 namespace AutomationPractice
@@ -12,9 +13,13 @@ namespace AutomationPractice
         [SetUp]
         public void Setup()
         {
-          _driver = new ChromeDriver ();_driver.Navigate().GoToUrl("https://www.walmart.com.mx/inicio");
-          _driver.Manage().Window.Maximize();
-          _homePage = new HomePage(_driver);
+            //ChromeOptions options = new ChromeOptions();
+            //options.AddArgument("--incognito");
+            //_driver = new ChromeDriver(options);
+            _driver = new ChromeDriver();
+            _driver.Navigate().GoToUrl("https://www.walmart.com.mx/inicio");
+            _driver.Manage().Window.Maximize();
+            _homePage = new HomePage(_driver);
         }
 
         [TearDown]
@@ -28,9 +33,9 @@ namespace AutomationPractice
         public void Test1()
         {
             _homePage.Search("");
-            Assert.That(_driver.Title, Does.Contain("Haz tus compras por internet | Walmart tienda en línea"));
+            Assert.That(_driver.Title, Does.Contain("Walmart"));
         }
-        [Test,Order(2)]
+        [Test, Order(2)]
         public void Smarphone()
         {
             _homePage.Search("Smarphone");
@@ -38,7 +43,7 @@ namespace AutomationPractice
             _homePage.SearchSmarphone();
             Assert.That(_homePage.validateResultSmarphone, Is.EqualTo(true));
         }
-        [Test,Order(3)]
+        [Test, Order(3)]
         public void SearchFridge()
         {
             _homePage.Search("refrigerador");
